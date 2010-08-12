@@ -12,33 +12,33 @@ XML, JSON, Ruby and PHP are supported formats. See object notation for explanati
 
 Returns the originating country's name and code for the specified IP address.
 
-http://ec2-184-72-9-102.us-west-1.compute.amazonaws.com/countries/24.6.249.189.xml
-http://ec2-184-72-9-102.us-west-1.compute.amazonaws.com/countries/24.6.249.189.json
-http://ec2-184-72-9-102.us-west-1.compute.amazonaws.com/countries/24.6.249.189.rb
-http://ec2-184-72-9-102.us-west-1.compute.amazonaws.com/countries/24.6.249.189.php
+* http://ec2-184-72-9-102.us-west-1.compute.amazonaws.com/countries/24.6.249.189.xml
+* http://ec2-184-72-9-102.us-west-1.compute.amazonaws.com/countries/24.6.249.189.json
+* http://ec2-184-72-9-102.us-west-1.compute.amazonaws.com/countries/24.6.249.189.rb
+* http://ec2-184-72-9-102.us-west-1.compute.amazonaws.com/countries/24.6.249.189.php
 
 Special keyword `self` returns location of caller's IP Address.
 
-http://ec2-184-72-9-102.us-west-1.compute.amazonaws.com/countries/self.xml
-http://ec2-184-72-9-102.us-west-1.compute.amazonaws.com/countries/self.json
-http://ec2-184-72-9-102.us-west-1.compute.amazonaws.com/countries/self.rb
-http://ec2-184-72-9-102.us-west-1.compute.amazonaws.com/countries/self.php
+* http://ec2-184-72-9-102.us-west-1.compute.amazonaws.com/countries/self.xml
+* http://ec2-184-72-9-102.us-west-1.compute.amazonaws.com/countries/self.json
+* http://ec2-184-72-9-102.us-west-1.compute.amazonaws.com/countries/self.rb
+* http://ec2-184-72-9-102.us-west-1.compute.amazonaws.com/countries/self.php
 
 ## City Service
 Returns the country, state/region, city, US postal code, US area code, metro code, latitude, and longitude                information for the specified IP.
 
 
-http://ec2-184-72-9-102.us-west-1.compute.amazonaws.com/cities/24.6.249.189.xml
-http://ec2-184-72-9-102.us-west-1.compute.amazonaws.com/cities/24.6.249.189.json
-http://ec2-184-72-9-102.us-west-1.compute.amazonaws.com/cities/24.6.249.189.rb
-http://ec2-184-72-9-102.us-west-1.compute.amazonaws.com/cities/24.6.249.189.php
+* http://ec2-184-72-9-102.us-west-1.compute.amazonaws.com/cities/24.6.249.189.xml
+* http://ec2-184-72-9-102.us-west-1.compute.amazonaws.com/cities/24.6.249.189.json
+* http://ec2-184-72-9-102.us-west-1.compute.amazonaws.com/cities/24.6.249.189.rb
+* http://ec2-184-72-9-102.us-west-1.compute.amazonaws.com/cities/24.6.249.189.php
 
 Special keyword self returns location of caller's IP Address.
 
-http://ec2-184-72-9-102.us-west-1.compute.amazonaws.com/cities/self.xml
-http://ec2-184-72-9-102.us-west-1.compute.amazonaws.com/cities/self.json
-http://ec2-184-72-9-102.us-west-1.compute.amazonaws.com/cities/self.rb
-http://ec2-184-72-9-102.us-west-1.compute.amazonaws.com/cities/self.php
+* http://ec2-184-72-9-102.us-west-1.compute.amazonaws.com/cities/self.xml
+* http://ec2-184-72-9-102.us-west-1.compute.amazonaws.com/cities/self.json
+* http://ec2-184-72-9-102.us-west-1.compute.amazonaws.com/cities/self.rb
+* http://ec2-184-72-9-102.us-west-1.compute.amazonaws.com/cities/self.php
 
 ## Legacy GeoIP Service (depreacated)
 
@@ -128,7 +128,7 @@ Updates to GeoIPCity database are checked daily.
 
 ## About Service
 
-http://ec2-184-72-9-102.us-west-1.compute.amazonaws.com/about
+http://ec2-184-72-9-102.us-west-1.compute.amazonaws.com/about  
 
 ## FAQs
 <dl>
@@ -137,4 +137,3 @@ http://ec2-184-72-9-102.us-west-1.compute.amazonaws.com/about
 	<dt>Does it support IPv6?</dt>
 	<dd>No. There are limited GeoIP databases for IPV6 yet. It will supported in future.</dd>
 </dl>
-
