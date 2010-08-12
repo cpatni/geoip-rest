@@ -2,7 +2,7 @@
 
 GeoIP RESTful service provides a user's location by IP address. The URL scheme is:
 
-http://geoip.ign.com/cities/{ip}.{format}
+http://geoip.ign.com/cities/{ip}.{format}  
 http://geoip.ign.com/countries/{ip}.{format}
 
 XML, JSON, Ruby and PHP are supported formats. See object notation for explanation.
