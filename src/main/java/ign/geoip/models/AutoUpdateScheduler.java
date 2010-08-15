@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
 import com.google.inject.name.Named;
+import com.maxmind.geoip.DatabaseInfo;
 import com.maxmind.geoip.LookupService;
 
 import java.io.File;
@@ -85,7 +86,7 @@ public class AutoUpdateScheduler {
         }, 0, 15, TimeUnit.SECONDS);
     }
 
-
+    
     public int getBlackoutPeriod() {
         return blackoutPeriod;
     }
@@ -108,5 +109,9 @@ public class AutoUpdateScheduler {
 
     public String getDatabase() {
         return database;
+    }
+
+    public DatabaseInfo getDatabaseInfo() {
+        return getGeoIPCity().getLookupService().getDatabaseInfo();
     }
 }

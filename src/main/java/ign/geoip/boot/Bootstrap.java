@@ -16,9 +16,15 @@ import ign.geoip.controllers.SendServerHeader;
 import ign.geoip.controllers.TrafficController;
 
 import javax.servlet.ServletContextEvent;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.logging.Logger;
@@ -72,13 +78,36 @@ public class Bootstrap extends GuiceServletContextListener {
                 return System.getProperty("database", "db/GeoIPCity.dat");
             }
 
+            @Provides
+            @Named("database")
+            public File getDatabaseFile() {
+                return new File(System.getProperty("database", "db/GeoIPCity.dat"));
+            }
+
+            @Provides
+            @Named("metros")
+            public String getAllMetrosAsString() throws IOException {
+                InputStream in = getClass().getClassLoader().getResourceAsStream("ign/geoip/models/metros.tsv");
+                try {
+                    StringBuilder fileData = new StringBuilder(1000);
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+                    char[] buf = new char[1024];
+                    int numRead=0;
+                    while((numRead=reader.read(buf)) != -1){
+                        String readData = String.valueOf(buf, 0, numRead);
+                        fileData.append(readData);
+                    }
+                    return fileData.toString();
+
+                }
+                finally {
+                    in.close();
+                }
+            }
 
         });
 
     }
-
-    //ses.scheduleWithFixedDelay(this, 0, 1, TimeUnit.DAYS);
-
 
     public Stage getStage() {
         return Stage.valueOf(getEnvironment().toUpperCase());
@@ -95,8 +124,12 @@ public class Bootstrap extends GuiceServletContextListener {
 
     public void contextDestroyed(ServletContextEvent servletContextEvent) {
         super.contextDestroyed(servletContextEvent);
-        scheduledExecutorService.shutdownNow();
-        lookupService.close();
+        if(scheduledExecutorService != null) {
+            scheduledExecutorService.shutdownNow();
+        }
+        if(lookupService != null) {
+            lookupService.close();
+        }
     }
 
 

@@ -18,11 +18,12 @@ import static ign.geoip.helpers.ApplicationHelper.getIP;
 public class GeoIPCity {
     private volatile LookupService lookup;
     private Provider<HttpServletRequest> requestp;
-
+    private Metros metros;
 
     @Inject
-    public GeoIPCity(LookupService lookup, Provider<HttpServletRequest> requestp) {
+    public GeoIPCity(LookupService lookup, Metros metros, Provider<HttpServletRequest> requestp) {
         this.lookup = lookup;
+        this.metros = metros;
         this.requestp = requestp;
     }
 
@@ -30,7 +31,7 @@ public class GeoIPCity {
         return lookup;
     }
 
-    LookupService setLookupService(LookupService lookup) {
+    public LookupService setLookupService(LookupService lookup) {
         LookupService old = this.lookup;
         this.lookup = lookup;
         return old == lookup ? null : old;
@@ -48,7 +49,12 @@ public class GeoIPCity {
         com.maxmind.geoip.Location loc = lookup.getLocation(effectiveIP);
         return new City(loc.countryCode, loc.countryName, loc.region,
                 regionName.regionNameByCode(loc.countryCode, loc.region), loc.city, loc.postalCode,
-                loc.longitude, loc.latitude, loc.area_code, loc.metro_code, MetroCode.all().get(loc.metro_code),
+                loc.longitude, loc.latitude, loc.area_code, loc.metro_code, metros.find(loc.metro_code),
                 timeZone.timeZoneByCountryAndRegion(loc.countryCode, loc.region));
     }
+
+    public DatabaseInfo getDatabaseInfo() {
+        return lookup.getDatabaseInfo();
+    }
+
 }

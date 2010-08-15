@@ -1,18 +1,26 @@
 package ign.geoip.helpers;
 
-import junit.framework.TestCase;
-import junit.framework.Assert;
+import org.junit.Assert;
 import org.junit.Test;
-
-import static ign.geoip.helpers.ApplicationHelper.getIP;
-import static ign.geoip.helpers.ApplicationHelper.isTrivial;
-import static ign.geoip.helpers.ApplicationHelper.isNonTrivial;
-import static org.easymock.EasyMock.*;
 
 import javax.servlet.http.HttpServletRequest;
 
-import static junit.framework.Assert.*;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+
+import static ign.geoip.helpers.ApplicationHelper.getIP;
+import static ign.geoip.helpers.ApplicationHelper.getTrueClientIPFromXFF;
+import static ign.geoip.helpers.ApplicationHelper.isNonTrivial;
+import static ign.geoip.helpers.ApplicationHelper.isTrivial;
+import static ign.geoip.helpers.ApplicationHelper.tryNonNull;
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertNull;
+import static junit.framework.Assert.assertTrue;
+import static org.easymock.EasyMock.createMock;
+import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.replay;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 
 
 /**
@@ -23,19 +31,34 @@ import static org.junit.Assert.assertFalse;
 public class ApplicationHelperTest {
 
     @Test
-    public void tryNonNullTest() throws Exception {
-        String s1 = "foo";
-        String s2 = ApplicationHelper.tryNonNull(s1, "bar");
-        assertSame(s1, s2);
-
-        Long n1 = new Long(42);
-        Long n2 = ApplicationHelper.tryNonNull(null, n1);
-        assertSame(n1, n2);
-
-        assertNull(ApplicationHelper.tryNonNull(null, null));
+    public void privateConstructorTest() throws InstantiationException,
+            NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        Constructor<ApplicationHelper> cons = ApplicationHelper.class.getDeclaredConstructor();
+        assertFalse(cons.isAccessible());
+        cons.setAccessible(true);
+        assertEquals(ApplicationHelper.class, cons.newInstance().getClass());
 
     }
 
+    @Test
+    public void tryNonNullFirstItem() throws Exception {
+        String s1 = "foo";
+        String s2 = tryNonNull(s1, "bar");
+        assertEquals(s1, s2);
+
+    }
+
+    @Test
+    public void testNonNullSecondItem() {
+        Integer n1 = 42;
+        Integer n2 = tryNonNull(null, n1);
+        assertEquals(n1, n2);
+    }
+
+    @Test
+    public void testNonNullAllNull() {
+        assertNull(tryNonNull(null, null));
+    }
 
     @Test
     public void specifiedIPTest() {
@@ -61,12 +84,39 @@ public class ApplicationHelperTest {
     }
 
     @Test
+    public void selfAsIp() {
+        HttpServletRequest request = createMock(HttpServletRequest.class);
+        expect(request.getHeader("X-Forwarded-For")).andReturn("  ");
+        expect(request.getRemoteAddr()).andReturn("212.101.97.206");
+        replay(request);
+        assertEquals("212.101.97.206", getIP("self", request));
+    }
+
+    @Test
+    public void currentAsIp() {
+        HttpServletRequest request = createMock(HttpServletRequest.class);
+        expect(request.getHeader("X-Forwarded-For")).andReturn("  ");
+        expect(request.getRemoteAddr()).andReturn("212.101.97.206");
+        replay(request);
+        assertEquals("212.101.97.206", getIP("current", request));
+    }
+
+    @Test
     public void socketIpTestNullXFF() {
         HttpServletRequest request = createMock(HttpServletRequest.class);
         expect(request.getHeader("X-Forwarded-For")).andReturn(null);
         expect(request.getRemoteAddr()).andReturn("212.101.97.206");
         replay(request);
         assertEquals("212.101.97.206", getIP(null, request));
+    }
+
+    @Test
+    public void getTrueClientIPFromXFFTest() {
+        HttpServletRequest request = createMock(HttpServletRequest.class);
+        expect(request.getHeader("X-Forwarded-For")).andReturn("212.101.97.206");
+        replay(request);
+        assertEquals("212.101.97.206", getTrueClientIPFromXFF(request));
+
     }
 
     @Test
@@ -98,8 +148,5 @@ public class ApplicationHelperTest {
     public void testHelloAsTrivial() {
         assertTrue(isNonTrivial("Hello"));
     }
-
-
-
 
 }

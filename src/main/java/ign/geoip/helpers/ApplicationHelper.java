@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
  * Time: 11:42:21 AM
  */
 public class ApplicationHelper {
+    private ApplicationHelper() {
+    }
 
     /**
      * Returns the first of two given parameters that is not {@code null}, if
@@ -48,7 +50,10 @@ public class ApplicationHelper {
             int index = xff.indexOf(",");
             if (index > 0) {
                 return xff.substring(0, index).trim();
+            } else {
+                return xff;
             }
+
         }
         return request.getRemoteAddr();
     }
