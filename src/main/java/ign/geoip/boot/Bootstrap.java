@@ -11,6 +11,7 @@ import com.google.inject.servlet.RequestScoped;
 import com.maxmind.geoip.LookupService;
 import com.sun.jersey.guice.JerseyServletModule;
 import com.sun.jersey.guice.spi.container.servlet.GuiceContainer;
+import ign.geoip.controllers.AboutController;
 import ign.geoip.controllers.CountriesController;
 import ign.geoip.controllers.SendServerHeader;
 import ign.geoip.controllers.TrafficController;
@@ -48,6 +49,7 @@ public class Bootstrap extends GuiceServletContextListener {
             @Override
             protected void configureServlets() {
                 bind(CountriesController.class).in(RequestScoped.class);
+                bind(AboutController.class).asEagerSingleton();
 
                 filter("/*").through(SendServerHeader.class);
 
