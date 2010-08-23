@@ -12,33 +12,33 @@ XML, JSON, Ruby and PHP are supported formats. See object notation for explanati
 
 Returns the originating country's name and code for the specified IP address.
 
-* http://ec2-184-72-9-102.us-west-1.compute.amazonaws.com/countries/24.6.249.189.xml
-* http://ec2-184-72-9-102.us-west-1.compute.amazonaws.com/countries/24.6.249.189.json
-* http://ec2-184-72-9-102.us-west-1.compute.amazonaws.com/countries/24.6.249.189.rb
-* http://ec2-184-72-9-102.us-west-1.compute.amazonaws.com/countries/24.6.249.189.php
+* http://geoip.ign.com/countries/24.6.249.189.xml
+* http://geoip.ign.com/countries/24.6.249.189.json
+* http://geoip.ign.com/countries/24.6.249.189.rb
+* http://geoip.ign.com/countries/24.6.249.189.php
 
 Special keyword `self` returns location of caller's IP Address.
 
-* http://ec2-184-72-9-102.us-west-1.compute.amazonaws.com/countries/self.xml
-* http://ec2-184-72-9-102.us-west-1.compute.amazonaws.com/countries/self.json
-* http://ec2-184-72-9-102.us-west-1.compute.amazonaws.com/countries/self.rb
-* http://ec2-184-72-9-102.us-west-1.compute.amazonaws.com/countries/self.php
+* http://geoip.ign.com/countries/self.xml
+* http://geoip.ign.com/countries/self.json
+* http://geoip.ign.com/countries/self.rb
+* http://geoip.ign.com/countries/self.php
 
 ## City Service
 Returns the country, state/region, city, US postal code, US area code, metro code, latitude, and longitude                information for the specified IP.
 
 
-* http://ec2-184-72-9-102.us-west-1.compute.amazonaws.com/cities/24.6.249.189.xml
-* http://ec2-184-72-9-102.us-west-1.compute.amazonaws.com/cities/24.6.249.189.json
-* http://ec2-184-72-9-102.us-west-1.compute.amazonaws.com/cities/24.6.249.189.rb
-* http://ec2-184-72-9-102.us-west-1.compute.amazonaws.com/cities/24.6.249.189.php
+* http://geoip.ign.com/cities/24.6.249.189.xml
+* http://geoip.ign.com/cities/24.6.249.189.json
+* http://geoip.ign.com/cities/24.6.249.189.rb
+* http://geoip.ign.com/cities/24.6.249.189.php
 
 Special keyword self returns location of caller's IP Address.
 
-* http://ec2-184-72-9-102.us-west-1.compute.amazonaws.com/cities/self.xml
-* http://ec2-184-72-9-102.us-west-1.compute.amazonaws.com/cities/self.json
-* http://ec2-184-72-9-102.us-west-1.compute.amazonaws.com/cities/self.rb
-* http://ec2-184-72-9-102.us-west-1.compute.amazonaws.com/cities/self.php
+* http://geoip.ign.com/cities/self.xml
+* http://geoip.ign.com/cities/self.json
+* http://geoip.ign.com/cities/self.rb
+* http://geoip.ign.com/cities/self.php
 
 ## Legacy GeoIP Service (depreacated)
 
@@ -58,15 +58,15 @@ The GeoIP API provides XML, JSON, PHP and Ruby serialization format. Typically R
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
     <city>
       <name>Daly City</name>
-      <region_code>CA</region_code>
-      <region_name>California</region_name>
-      <country_code>US</country_code>
-      <country_name>United States</country_name>
-      <postal_code>94015</postal_code>
-      <metro_code>807</metro_code>
-      <metro_name>San Francisco-Oakland-San Jose</metro_name>
-      <time_zone>America/Los_Angeles</time_zone>
-      <area_code>650</area_code>
+      <regionCode>CA</regionCode>
+      <regionName>California</regionName>
+      <countryCode>US</countryCode>
+      <countryName>United States</countryName>
+      <postalCode>94015</postalCode>
+      <metroCode>807</metroCode>
+      <metroName>San Francisco-Oakland-San Jose</metroName>
+      <timeZone>America/Los_Angeles</timeZone>
+      <areaCode>650</areaCode>
       <longitude>-122.476395</longitude>
       <latitude>37.678604</latitude>
     </city>
@@ -74,20 +74,20 @@ The GeoIP API provides XML, JSON, PHP and Ruby serialization format. Typically R
 ### JSON
 
     {
-    name: Daly City
-    region_code: CA
-    region_name: California
-    country_code: US
-    country_name: United States
-    postal_code: 94015
-    metro_code: 807
-    metro_name: San Francisco-Oakland-San Jose
-    time_zone: America/Los_Angeles
-    area_code: 650
-    longitude: -122.476395
-    latitude: 37.678604
+      "name": "Daly City",
+      "regionCode": "CA",
+      "regionName": "California",
+      "countryCode": "US",
+      "countryName": "United States",
+      "postalCode: 94015,
+      "metroCode: 807,
+      "metroName": "San Francisco-Oakland-San Jose",
+      "timeZone": "America/Los_Angeles",
+      "areaCode: 650,
+      "longitude: -122.476395,
+      "latitude: 37.678604"
     }
-       
+            
 ### Ruby Object Notation
     {
       :name => "Daly City",
@@ -128,7 +128,7 @@ Updates to GeoIPCity database are checked daily.
 
 ## About Service
 
-http://ec2-184-72-9-102.us-west-1.compute.amazonaws.com/about  
+http://geoip.ign.com/about  
 
 ## FAQs
 <dl>
