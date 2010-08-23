@@ -24,15 +24,15 @@ public class CityTest {
         String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
                 "<city>\n" +
                 "  <name>Santa Cruz</name>\n" +
-                "  <region_code>CA</region_code>\n" +
-                "  <region_name>California</region_name>\n" +
-                "  <country_code>US</country_code>\n" +
-                "  <country_name>United States</country_name>\n" +
-                "  <postal_code>95065</postal_code>\n" +
-                "  <metro_code>807</metro_code>\n" +
-                "  <metro_name>San Francisco-Oakland-San Jose</metro_name>\n" +
-                "  <time_zone>America/Los_Angeles</time_zone>\n" +
-                "  <area_code>831</area_code>\n" +
+                "  <region-code>CA</region-code>\n" +
+                "  <region-name>California</region-name>\n" +
+                "  <country-code>US</country-code>\n" +
+                "  <country-name>United States</country-name>\n" +
+                "  <postal-code>95065</postal-code>\n" +
+                "  <metro-code>807</metro-code>\n" +
+                "  <metro-name>San Francisco-Oakland-San Jose</metro-name>\n" +
+                "  <time-zone>America/Los_Angeles</time-zone>\n" +
+                "  <area-code>831</area-code>\n" +
                 "  <longitude>-122.02</longitude>\n" +
                 "  <latitude>36.58</latitude>\n" +
                 "</city>";
@@ -42,14 +42,14 @@ public class CityTest {
 
     @Test
     public void locationJson() {
-        String json = "{\"name\": \"Santa Cruz\", \"region_code\": \"CA\", \"region_name\": \"California\", \"country_code\": \"US\", \"country_name\": \"United States\", \"postal_code\": \"95065\", \"metro_code\": 807, \"metro_name\": \"San Francisco-Oakland-San Jose\", \"time_zone\": \"America\\/Los_Angeles\", \"area_code\": 831, \"longitude\": -122.02, \"latitude\": 36.58}";
+        String json = "{\"name\": \"Santa Cruz\", \"regionCode\": \"CA\", \"regionName\": \"California\", \"countryCode\": \"US\", \"countryName\": \"United States\", \"postalCode\": \"95065\", \"metroCode\": 807, \"metroName\": \"San Francisco-Oakland-San Jose\", \"timeZone\": \"America\\/Los_Angeles\", \"areaCode\": 831, \"longitude\": -122.02, \"latitude\": 36.58}";
         assertEquals(json, mysterySpot().toJson());
 
     }
 
     @Test
     public void locationJsonp() {
-        String jsonp = "foo({\"name\": \"Santa Cruz\", \"region_code\": \"CA\", \"region_name\": \"California\", \"country_code\": \"US\", \"country_name\": \"United States\", \"postal_code\": \"95065\", \"metro_code\": 807, \"metro_name\": \"San Francisco-Oakland-San Jose\", \"time_zone\": \"America\\/Los_Angeles\", \"area_code\": 831, \"longitude\": -122.02, \"latitude\": 36.58})";
+        String jsonp = "foo({\"name\": \"Santa Cruz\", \"regionCode\": \"CA\", \"regionName\": \"California\", \"countryCode\": \"US\", \"countryName\": \"United States\", \"postalCode\": \"95065\", \"metroCode\": 807, \"metroName\": \"San Francisco-Oakland-San Jose\", \"timeZone\": \"America\\/Los_Angeles\", \"areaCode\": 831, \"longitude\": -122.02, \"latitude\": 36.58})";
         assertEquals(jsonp, mysterySpot().toJsonp("foo"));
 
     }
