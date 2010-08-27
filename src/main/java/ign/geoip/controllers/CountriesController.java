@@ -2,10 +2,12 @@ package ign.geoip.controllers;
 
 import com.google.inject.Inject;
 import com.google.inject.servlet.RequestScoped;
+import ign.geoip.models.Country;
 import ign.geoip.models.GeoIPCity;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 /**
  * User: cpatni
@@ -25,10 +27,11 @@ public class CountriesController {
         this.geoIP = geoIP;
     }
 
-
     @GET
     public String countryHtml(@PathParam("ip") String ip) {
-        return geoIP.country(ip).toXml();
+        Country country = geoIP.country(ip);
+        
+        return country.toXml();
     }
 
     @Produces(MediaType.APPLICATION_XML)

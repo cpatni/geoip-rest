@@ -2,6 +2,7 @@ package ign.geoip.controllers;
 
 import com.google.inject.Inject;
 import com.google.inject.servlet.RequestScoped;
+import com.sun.jersey.api.NotFoundException;
 import ign.geoip.models.Country;
 import ign.geoip.models.GeoIPCity;
 
@@ -31,7 +32,12 @@ public class LegacyCountriesController {
 
     @GET
     public Response legacyCountry(@QueryParam("c") String c, @QueryParam("fmt") String fmt, @QueryParam("ip") String ip) {
-        Country country = geoIP.country(ip);
+        Country country = null;
+        try {
+            country = geoIP.country(ip);
+        } catch (NotFoundException e) {
+            country = Country.UNKNOWN;
+        }
         if ("xml".equalsIgnoreCase(fmt)) {
             return Response.ok(country.toXml(), MediaType.APPLICATION_XML_TYPE).build();
         } else {//if("json".equalsIgnoreCase(fmt)) {

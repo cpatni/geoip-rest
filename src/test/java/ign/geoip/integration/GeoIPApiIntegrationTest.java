@@ -118,7 +118,12 @@ public class GeoIPApiIntegrationTest {
     private Response get(String uri) throws IOException {
         URL url = new URL("http", "localhost", port, uri);
         HttpURLConnection request = (HttpURLConnection) url.openConnection();
-        InputStream in = request.getInputStream();
+        InputStream in = null;
+        try {
+            in = request.getInputStream();
+        } catch (IOException e) {
+            in = request.getErrorStream();
+        }
         return new Response(request.getResponseCode(), request.getResponseMessage(), request.getContentType(), request.getHeaderFields(), asString(in));
     }
 
@@ -235,6 +240,42 @@ public class GeoIPApiIntegrationTest {
         assertTrue("X-Server is present", response.headers.get("X-Server").size() > 0);
         assertTrue("Contains :name ", response.body.contains(":name"));
     }
+
+    @Test
+    public void testInternalAddressJSON() throws IOException {
+        Response response = get("/g/?c=1&fmt=json&ip=192.168.0.76");
+        assertEquals(200, response.status);
+        assertEquals("OK", response.message);
+        assertEquals("application/json", response.contentType);
+        assertTrue("X-Server is present", response.headers.get("X-Server").size() > 0);
+        assertTrue("Contains :name ", response.body.contains("\"name\""));
+        assertTrue("Contains country code '--' ", response.body.contains("--"));
+        assertTrue("Contains country name 'N/A' ", response.body.contains("N/A"));
+    }
+
+    @Test
+    public void testInternalAddressXml() throws IOException {
+        Response response = get("/g/?c=1&fmt=xml&ip=192.168.0.76");
+        assertEquals(200, response.status);
+        assertEquals("OK", response.message);
+        assertEquals("application/xml", response.contentType);
+        assertTrue("X-Server is present", response.headers.get("X-Server").size() > 0);
+        assertTrue("Contains :name ", response.body.contains("</name>"));
+        assertTrue("Contains country code '--' ", response.body.contains("--"));
+        assertTrue("Contains country name 'N/A' ", response.body.contains("N/A"));
+    }
+
+    @Test
+    public void testLocalhostJson() throws IOException {
+        Response response = get("/cities/127.0.0.1.json");
+        assertEquals(404, response.status);
+        assertEquals("Not Found", response.message);
+        assertEquals("text/plain", response.contentType);
+        assertTrue("X-Server is present", response.headers.get("X-Server").size() > 0);
+        assertEquals("There is no place like 127.0.0.1", response.body);
+    }
+
+    //curl "http://localhost:8080/cities/127.0.0.1.json"
 
     @AfterClass
     public static void shutdown() throws Exception {

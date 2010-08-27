@@ -12,6 +12,9 @@ import static org.apache.commons.lang.StringEscapeUtils.escapeXml;
  */
 public class Country {
 
+
+    public static final Country UNKNOWN = new Country("--", "N/A");
+
     private final String code, name;
 
     public Country(String code, String name) {
