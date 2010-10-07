@@ -127,6 +127,21 @@
                 <artifactId>cobertura-maven-plugin</artifactId>
                 <version>2.2</version>
                 <configuration>
+                    <instrumentation>
+                      <ignores>
+                          <ignore>com.maxmind.geoip.*</ignore>
+                          <ignore>ign.geoip.boot.*</ignore>
+                          <ignore>ign.geoip.integration.*</ignore>
+                      </ignores>
+                      <excludes>
+                        <exclude>com/maxmind/geoip/*.class</exclude>
+                        <exclude>ign/geoip/boot/*.class</exclude>
+<!--
+                        <exclude>ign/geoip/**/*Test.class</exclude>
+-->
+                      </excludes>
+
+                    </instrumentation>
                     <formats>
                         <format>xml</format>
                     </formats>
