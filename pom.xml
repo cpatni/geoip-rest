@@ -136,6 +136,7 @@
                       <excludes>
                         <exclude>com/maxmind/geoip/*.class</exclude>
                         <exclude>ign/geoip/boot/*.class</exclude>
+
 <!--
                         <exclude>ign/geoip/**/*Test.class</exclude>
 -->
