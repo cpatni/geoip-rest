@@ -118,7 +118,12 @@ public class GeoIPApiIntegrationTest {
     private Response get(String uri) throws IOException {
         URL url = new URL("http", "localhost", port, uri);
         HttpURLConnection request = (HttpURLConnection) url.openConnection();
-        InputStream in = request.getInputStream();
+        InputStream in = null;
+        try {
+            in = request.getInputStream();
+        } catch (IOException e) {
+            in = request.getErrorStream();
+        }
         return new Response(request.getResponseCode(), request.getResponseMessage(), request.getContentType(), request.getHeaderFields(), asString(in));
     }
 
@@ -224,6 +229,18 @@ public class GeoIPApiIntegrationTest {
         assertTrue("X-Server is present", response.headers.get("X-Server").size() > 0);
         assertTrue("Contains :name ", response.body.contains(":name"));
     }
+
+
+    @Test
+    public void testLocalhostJson() throws IOException {
+        Response response = get("/cities/127.0.0.1.json");
+        assertEquals(404, response.status);
+        assertEquals("Not Found", response.message);
+        assertEquals("text/plain", response.contentType);
+        assertTrue("X-Server is present", response.headers.get("X-Server").size() > 0);
+        assertEquals("There is no place like 127.0.0.1", response.body);
+    }
+
 
     @AfterClass
     public static void shutdown() throws Exception {

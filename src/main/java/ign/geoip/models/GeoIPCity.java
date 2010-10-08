@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
 import com.maxmind.geoip.*;
+import com.sun.jersey.api.NotFoundException;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,6 +17,7 @@ import static ign.geoip.helpers.ApplicationHelper.getIP;
  */
 @Singleton
 public class GeoIPCity {
+
     private volatile LookupService lookup;
     private Provider<HttpServletRequest> requestp;
     private Metros metros;
@@ -40,6 +42,9 @@ public class GeoIPCity {
     public Country country(String ip) {
         ip = getIP(ip, requestp.get());
         com.maxmind.geoip.Location location = lookup.getLocation(ip);
+        if(location == null) {
+            throw new NotFoundException("There is no place like "+ip);
+        }
         return new Country(location.countryCode, location.countryName);
     }
 
@@ -47,6 +52,9 @@ public class GeoIPCity {
     public City location(String ip) {
         String effectiveIP = getIP(ip, requestp.get());
         com.maxmind.geoip.Location loc = lookup.getLocation(effectiveIP);
+        if(loc == null) {
+            throw new NotFoundException("There is no place like "+ip);
+        }
         return new City(loc.countryCode, loc.countryName, loc.region,
                 regionName.regionNameByCode(loc.countryCode, loc.region), loc.city, loc.postalCode,
                 loc.longitude, loc.latitude, loc.area_code, loc.metro_code, metros.find(loc.metro_code),

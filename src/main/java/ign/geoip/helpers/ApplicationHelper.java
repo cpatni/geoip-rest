@@ -11,6 +11,16 @@ public class ApplicationHelper {
     private ApplicationHelper() {
     }
 
+    /**
+     * Returns the first of two given parameters that is not {@code null}, if
+     * either is, or returns {@code null}.
+     *
+     * @param first first object
+     * @param second second object
+     * @return {@code first} if {@code first} is not {@code null}, or
+     *         {@code second} if {@code first} is {@code null} and {@code second} is
+     *         not {@code null}
+     */
     public static <T> T tryNonNull(T first, T second) {
         return first != null ? first : second;
     }
