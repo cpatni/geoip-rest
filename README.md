@@ -54,7 +54,6 @@ languages seems like a very good fit for REST style services. Sample outputs of 
 ## Object Notation
 
 The GeoIP API provides XML, JSON, PHP and Ruby serialization format. Typically RESTful services are limited to JavaScript Object Notation (JSON). We are extending object notations to include PHP and Ruby languages now to better target PHP and Ruby applications. Targetting Object Notations for dynamic languages seems like a very good fit for REST style services. Sample outputs of various Object Notations are:
->>>>>>> d44fe55e7aebdafff983c7e59a5a5e7c24523705
 
 
 ### XML
