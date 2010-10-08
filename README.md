@@ -6,7 +6,7 @@ GeoIP RESTful APIs are powered by Maxmind GeoIP City Database and provide Geo Lo
 * http://localhost/cities/{ip}.{format}
 * http://localhost/countries/{ip}.{format}
 
-XML, JSON, Ruby and PHP are supported formats. See object notation for explanation.
+XML, JSON, Ruby and PHP are supported formats. See object notation for explanation. The API logic has 100% code coverage.
 
 
 ## Country Service
