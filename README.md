@@ -137,14 +137,13 @@ http://localhost/about
 geoip-rest is licensed user GNU LESSER GENERAL PUBLIC LICENSE. 
 
 geoip-rest requires MaxMind GeoIP database and usage of geoip-rest is 
-subject to MaxMind GeoLite database licensing requirement. MaxMind requires 
+subject to MaxMind GeoLite database licensing. MaxMind requires 
 that the usage of API would only be allowed with the GeoLite databases, 
 provided that MaxMind is credited as the source of the data.
 
 http://geolite.maxmind.com/download/geoip/database/LICENSE.txt
 
-In order to waive the attribution requirement or to use one of the paid, GeoIP databases,  
-contact MaxMind.
+In order to waive the attribution requirement or to use one of the paid, GeoIP databases or contact MaxMind.
 
 
 
