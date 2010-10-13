@@ -143,7 +143,4 @@ provided that MaxMind is credited as the source of the data.
 
 http://geolite.maxmind.com/download/geoip/database/LICENSE.txt
 
-In order to waive the attribution requirement or to use one of the paid, GeoIP databases or contact MaxMind.
-
-
-
+To waive the attribution requirement or to use one of the paid GeoIP databases, contact MaxMind.
