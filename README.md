@@ -44,7 +44,7 @@ Special keyword self returns location of caller's IP Address.
 
 
 ## Object Notation
-See http://rubyorchard.wordpress.com/2010/08/17/object-notations-beyond-javascript/ for more details.
+See [Object Notations Beyond Javascript](http://rubyorchard.wordpress.com/2010/08/17/object-notations-beyond-javascript/) for more details.
 
 The GeoIP API provides XML, JSON, PHP and Ruby serialization format. Typically RESTful services are
 limited to JavaScript Object Notation (JSON). We are extending object notations to include PHP and
@@ -61,15 +61,15 @@ The GeoIP API provides XML, JSON, PHP and Ruby serialization format. Typically R
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
     <city>
       <name>Daly City</name>
-      <regionCode>CA</regionCode>
-      <regionName>California</regionName>
-      <countryCode>US</countryCode>
-      <countryName>United States</countryName>
-      <postalCode>94015</postalCode>
-      <metroCode>807</metroCode>
-      <metroName>San Francisco-Oakland-San Jose</metroName>
-      <timeZone>America/Los_Angeles</timeZone>
-      <areaCode>650</areaCode>
+      <region-code>CA</region-code>
+      <region-name>California</region-name>
+      <country-code>US</country-code>
+      <country-name>United States</country-name>
+      <postal-code>94015</postal-code>
+      <metro-code>807</metro-code>
+      <metro-name>San Francisco-Oakland-San Jose</metro-name>
+      <time-zone>America/Los_Angeles</time-zone>
+      <area-code>650</area-code>
       <longitude>-122.476395</longitude>
       <latitude>37.678604</latitude>
     </city>
